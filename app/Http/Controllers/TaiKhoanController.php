@@ -113,4 +113,33 @@ class TaiKhoanController extends Controller
         Session::put('giohang',null);
         return Redirect::to('/home');
     }
+
+    public function sua_thongtin()
+    {
+        $idKH = Session::get('IdKH');
+        $KH = DB::table('khachhang')->where('IdKH',$idKH)->first();
+
+        $banDaDat = DB::table('phieudatban')->where('IdKH',$idKH)->join('nhahang','nhahang.IdNhaHang','phieudatban.IdNhaHang')->get();
+        return view('pages.taikhoan.chinhsuathongtin', compact('KH','banDaDat'));
+    }
+
+    public function handleEdit(Request $request)
+    {
+        $tenKhachHang = $request->tenKhachHang;
+        $soDienThoai = $request->soDienThoai;
+        $diaChi = $request->diaChi;
+
+        $idKH = Session::get('IdKH');
+        $update = DB::table('khachhang')->where('IdKH',$idKH)->update(
+            [
+                'tenKH' => $tenKhachHang,
+                'SdtKH' => $soDienThoai,
+                'DiaChiKH' => $diaChi
+            ]
+        );
+
+        $request->session()->flash('update-success', 'Chỉnh sửa thành công');
+
+        return redirect()->back();
+    }
 }

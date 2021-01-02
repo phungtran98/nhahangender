@@ -64,10 +64,16 @@ Route::post('/capnhat-phieudatmonan/{IdDatMon}','PhieuDatMonAnController@capnhat
 
 //Route::get('/thong-tin-chi-tiet', 'ThongTinChiTietController@index');
 
+#Nhà hàng
+Route::get('nha-hang', 'NhaHangController@index')->name('nha-hang.index');
+Route::get('them-nha-hang', 'NhaHangController@create')->name('nha-hang.view-add');
+Route::post('xu-ly-them-nha-hang', 'NhaHangController@store')->name('nha-hang.handle-add');
 
 // Profile
-Route::get('/sua-thongtin/{IdKH}', 'TaiKhoanController@sua_thongtin')->name('sua_thongtin');
+Route::get('/sua-thongtin', 'TaiKhoanController@sua_thongtin')->name('sua_thongtin');
+Route::post('/xu-ly-sua-thong-tin', 'TaiKhoanController@handleEdit')->name('thong-tin.chinh-sua');
 
+Route::get('/huy-don/{idDon}', 'PhieuDatBanController@huyDon')->name('phieu-dat.huy-don');
 
 //back-end
 Route::get('/admin','AdminController@index');
@@ -198,6 +204,7 @@ Route::post('/admin-dashboard','AdminController@dashboard');
 
     Route::get('/lietke-phieudatban','PhieuDatBanController@lietke_phieudatban');
 
+    Route::get('/duyet-ban/{idPhieu}', 'PhieuDatBanController@duyetBan')->name('phieu-dat.duyet-ban');
 
     // show
     Route::post('/luu-phieudatban','PhieuDatBanController@luu_phieudatban');

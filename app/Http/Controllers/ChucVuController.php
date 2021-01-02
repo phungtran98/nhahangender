@@ -25,7 +25,8 @@ class ChucVuController extends Controller
 
     public function them_chucvu(){
         $this->authlogin();
-        return view('admin.chucvu.them_chucvu');
+        $heSoLuong = DB::table('luong')->get();
+        return view('admin.chucvu.them_chucvu', compact('heSoLuong'));
     }
 
     public function lietke_chucvu(){
@@ -41,8 +42,8 @@ class ChucVuController extends Controller
 
     public function luu_chucvu(Request $request){
         $data = array();
-        $data['IdCV'] = $request->IdCV;
-        $data['IdLuong'] = $request->IdCV;
+        // $data['IdCV'] = $request->IdCV;
+        $data['IdLuong'] = $request->IdLuong;
         $data['TenCV'] = $request->TenCV;
 
         DB::table('chucvu')->insert($data);

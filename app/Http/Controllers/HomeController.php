@@ -56,6 +56,7 @@ class HomeController extends Controller
         $TenTaiKhoan = Session::get('TenTaiKhoan');
         $IdKH = Session::get('IdKH');
         $TenKH = Session::get('TenKH');
+        $nhaHang = $request->IdNhaHang;
         // if ($TenTaiKhoan->count() == 0) {
         //     return Redirect::to('dangnhap');
         // }
@@ -63,10 +64,13 @@ class HomeController extends Controller
         DB::table('phieudatban')->insert([
             'ThoiGian' => $request->input('ThoiGian'),
             'SoLuongBan' => $request->input('SoLuongBan'),
-            'IdKH' => $IdKH
+            'IdKH' => $IdKH,
+            'IdNhaHang' => $nhaHang,
+            'TinhTrang' => 0
         ]);
-        return response()->json(['ThoiGian'=> $request->input('ThoiGian'), 'SoLuongBan' => $request->input('SoLuongBan'), 'IdKH' => $IdKH, 'TenKH' => $TenKH]);
-
+        // dd('done');
+        Session::flash('alert-order','Đặt bàn thành công');
+        return redirect()->back();
     }
 
     // Lấy món ăn và số lượng ở home đem qua đặt món

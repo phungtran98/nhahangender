@@ -107,7 +107,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{URL::to('/datmon')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+                    <a href="{{URL::to('/datmon')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng
+                        @if (Session::get('TenTaiKhoan') && session()->get('giohang') != null)
+                        ({{ count(session()->get('giohang')) }})
+                        @endif
+                    </a>
                 </li>
                 <?php
                     $TenTaiKhoan = Session::get('TenTaiKhoan');
@@ -157,7 +161,7 @@
     <script type="text/javascript" src="{{ asset('public/frontend/js/jQuery.scrollSpeed.js') }}"></script>
     <script type="text/javascript" src="{{asset('public/frontend/js/jquery.flexslider.min.js')}}"></script>
     <script src="{{ asset('public/frontend/js/script.js') }}"></script>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", (event) => {
 
             $("#datban").submit(function(e) {
@@ -185,7 +189,7 @@
         });
         });
 
-    </script>
+    </script> --}}
 
 </body>
 

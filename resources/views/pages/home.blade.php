@@ -6,8 +6,11 @@
     display: inline;
 }
 </style>
-
-
+@if (Session::has('alert-order'))
+    <div class="alert alert-warning alert-dismissible show" role="alert">
+        <strong>Thông báo !</strong> {{ Session::get('alert-order') }}.
+    </div>
+@endif
  <!--== 5. Header ==-->
  <section id="header-slider" class="owl-carousel" style="margin-top: 0">
     <div class="item">
@@ -310,7 +313,7 @@
 
                         @if($khachhang->count() != 0)
                             @foreach ($khachhang as $kh)
-                            <form class="reservation-form" id="datban" method="post" action="{{URL::to('/xulydatban')}}">
+                            <form class="reservation-form" id="datban" method="POST" action="{{URL::to('/xulydatban')}}">
                                 {{csrf_field()}}
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
@@ -331,9 +334,18 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="col-md-12 col-sm-12">
-                                        <textarea type="text" name="GhiChu" class="form-control reserve-form empty iconified" id="message" rows="3" required="required" placeholder="  &#xf086;  Ghi chú"></textarea>
-                                    </div> --}}
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <select name="IdNhaHang" id="" class="form-control">
+                                                {{
+                                                    $nhaHang = DB::table('nhahang')->get()
+                                                }}
+                                                @foreach ($nhaHang as $item)
+                                                    <option value="{{ $item->IdNhaHang }}">{{ $item->TenNhaHang }} - {{ $item->DiaChi }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 col-sm-12">
                                         <button type="submit" id="submit" name="submit" class="btn btn-reservation">
                                             <span><i class="fa fa-check-circle-o"></i></span>

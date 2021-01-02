@@ -38,11 +38,22 @@ class PhieuDatBanController extends Controller
         //Lấy dữ liệu từ bảng khachhang tham gia vào bảng phieudatban theo IdKH
         $lietke_phieudatban = DB::table('phieudatban')
         ->join('khachhang','khachhang.IdKH','=','phieudatban.IdKH')
-        ->get();
+        ->orderBy('TinhTrang','asc')
+        ->paginate(5);
 
         $quanly_phieudatban = view('admin.phieudatban.lietke_phieudatban')->with('lietke_phieudatban',$lietke_phieudatban);
 
         return view('admin_layout')->with('admin.phieudatban.lietke_phieudatban',$quanly_phieudatban);
+    }
+
+    public function duyetBan($idPhieu)
+    {
+        DB::table('phieudatban')->where('IdDatBan',$idPhieu)->update(
+            [
+                'TinhTrang' => 1
+            ]
+        );
+        return redirect()->back();
     }
 
     // Lưu phiếu đặt bàn
@@ -52,6 +63,7 @@ class PhieuDatBanController extends Controller
         $data['IdKH'] = $request->IdKH;
         $data['ThoiGian'] = $request->ThoiGian;
         $data['SoLuongBan'] = $request->SoLuongBan;
+        $data['IdNhaHang'] = $request->IdNhaHang;
 
         DB::table('phieudatban')->insert($data);
         Session::put('message','Thêm phiếu đặt bàn thành công');
@@ -85,5 +97,13 @@ class PhieuDatBanController extends Controller
         DB::table('phieudatban')->where('IdDatBan',$IdDatBan)->delete();
         Session::put('message','Xoá phiếu đặt bàn thành công');
         return Redirect::to('lietke-phieudatban');
+    }
+
+
+    public function huyDon($idDon)
+    {
+        DB::table('phieudatban')->where('IdDatBan',$idDon)->update(['TinhTrang' => 2]);
+        Session::flash('message-del','Hủy đặt bàn thành công');
+        return redirect()->back();
     }
 }

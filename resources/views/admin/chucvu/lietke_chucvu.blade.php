@@ -38,7 +38,7 @@
                     </th>
                     <th>STT</th>
                     <th>Tên chức vụ</th>
-                    <th>Lương</th>
+                    <th>Hệ số lương</th>
                     <th style="width:30px;"></th>
                     </tr>
                 </thead>
@@ -50,7 +50,7 @@
                     <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
                     <td>{{$chucvu->IdCV}} </td>
                     <td>{{$chucvu->TenCV}} </td>
-                    <td>{{$chucvu->HeSoLuong}} VNĐ</td>
+                    <td>{{$chucvu->HeSoLuong}}</td>
                     <td>
                         <a href="{{URL::to('/sua-chucvu/'.$chucvu->IdCV)}}" class="active styling-edit" ui-toggle-class="">
                             <i class="fa fa-pencil-square-o text-success text-active"></i>

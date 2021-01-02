@@ -91,7 +91,16 @@
                                 <span>Tổng quan</span>
                             </a>
                         </li>
-
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Quản lý nhà hàng</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{ route('nha-hang.view-add') }}">Thêm nhà hàng</a></li>
+                                <li><a href="{{ route('nha-hang.index') }}">Liệt kê nhà hàng</a></li>
+                            </ul>
+                        </li>
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>

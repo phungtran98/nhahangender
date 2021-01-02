@@ -25,7 +25,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Thời gian</label>
-                            <input type="datetime-local" value="{{$sua->ThoiGian}}" name="ThoiGian" class="form-control" id="thoigian">
+                            <input type="datetime" value="{{$sua->ThoiGian}}" name="ThoiGian" class="form-control" id="thoigian">
                         </div>
 
                         <div class="form-group">

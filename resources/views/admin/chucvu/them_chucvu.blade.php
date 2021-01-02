@@ -20,14 +20,19 @@
                 <div class="position-center">
                     <form role="form" action="{{URL::to('/luu-chucvu')}}" method="post">
                         {{ csrf_field() }}
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="exampleInputEmail1">ID chức vụ</label>
                             <input type="number" name="IdCV" class="form-control" id="id_cv">
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">ID lương</label>
-                            <input type="number" name="IdLuong" class="form-control" id="id_luong">
+                            <label for="exampleInputEmail1">Hệ số lương</label>
+                            <select name="IdLuong" id="" class="form-control">
+                                @foreach ($heSoLuong as $item)
+                                    <option value="{{ $item->IdLuong }}">{{ $item->HeSoLuong }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="number" name="IdLuong" class="form-control" id="id_luong"> --}}
                         </div>
 
                         <div class="form-group">
