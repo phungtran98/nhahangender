@@ -78,6 +78,7 @@ class HomeController extends Controller
         $this->authlogin();
         $TongGiaTien=0;
         $SauGiam=0;
+        $nhahang= DB::table('nhahang')->get();
         if(session()->exists('giohang')){
 
             foreach (session()->get('giohang') as $giohang){
@@ -89,7 +90,7 @@ class HomeController extends Controller
         }
         $KH=DB::table('khachhang')->where('IdKH',session()->get('IdKH'))->first();
 //
-        return view('pages.giohang',compact('TongGiaTien','KH','SauGiam'));
+        return view('pages.giohang',compact('TongGiaTien','KH','SauGiam','nhahang'));
     }
 
     public function xulydatmon(Request $request,$Id){
@@ -137,6 +138,7 @@ class HomeController extends Controller
 
     // Thanh Toán
     public function order(Request $request) {
+        // dd($request->idnhahang);
             $TongGiaTien=0;
             $IdKH = Session::get('IdKH');
             DB::table('khachhang')
@@ -152,11 +154,13 @@ class HomeController extends Controller
             'TongGiaTien'=>$TongGiaTien,
             'PhuongThucThanhToan'=>$request->PhuongThucThanhToan,
             'IdKH' => $IdKH,
+            'TrangThai' => 0,
         ]);
         foreach (session()->get('giohang') as $giohang){
             DB::table('chitietdatmon')->insertGetId([
                 'IdDatMon' => $IdDatMon,
                 'IdMonAn'=>$giohang['IdMonAn'],
+                'IdNhaHang'=>$request->idnhahang,
                 'SoLuongMon'=>$giohang['SoLuongMon'],
                 'DonGiaMon' => $giohang['DonGia'],
             ]);

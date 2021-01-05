@@ -39,19 +39,13 @@
                     }
                 ?>
 
-                <thead> <?php $i=1?>
+                <thead><?php $i=1?>
                     <tr>
-
                     <th>STT</th>
-                    <th>Tên khách hàng</th>
-                    <th>Thời gian</th>
-                    {{-- <th>Món ăn</th>
-                    <th>Số lượng</th> --}}
-                    {{-- <th>Tổng tiền</th> --}}
-                    <th>Trạng Thái</th>
-                    <th>Thao tác</th>
-                    <th>Thanh Toán</th>
-                    <th style="width:30px;"></th>
+                    <th>Món ăn</th>
+                    <th>Số lượng</th>
+
+
                     </tr>
                 </thead>
 
@@ -59,33 +53,20 @@
 
                 <tbody>
                     <tr>
-                    <td> {{$i++}} </td>
-                    {{-- <td>{{$phieudatmonan->IdDatMon}} </td> --}}
-                    <td>{{$phieudatmonan->TenKH}} </td>
-                    <td>{{$phieudatmonan->ThoiGianDat}} </td>
-                    {{-- <td>{{$phieudatmonan->TenMon}} </td>
-                    <td>{{$phieudatmonan->SoLuongMon}} </td> --}}
+                        <td> {{$i++}} </td>
+                    <td>{{$phieudatmonan->TenMon}} </td>
+                    <td>{{$phieudatmonan->SoLuongMon}} </td>
                     {{-- <td>{{number_format($phieudatmonan->TongGiaTien)}} </td> --}}
-                    <td>
-                        @if ($phieudatmonan->TrangThai ==1)
-                        <span class="badge badge-success">Đã duyệt</span>
-                        @else
-                        <a href="{{ route('Admin.mon', ['id'=>$phieudatmonan->IdDatMon]) }}" title="Click để duyệt"><span class="badge badge-danger">Chưa duyệt</span></a>
-                        @endif
-                    </td>
-                    <td>{{$phieudatmonan->PhuongThucThanhToan==0?'Tiền mặt':'ATM'}} </td>
-                    <td>
-                        <a style="margin: 6px" href="{{URL::to('/sua-phieudatmonan/'.$phieudatmonan->IdDatMon)}}" class="active styling-edit" ui-toggle-class="">
-                            <i class="fa fa-pencil-square-o text-success text-active"></i>
-                        </a>
-                        <a style="margin: 6px" onclick="return confirm('Bạn có chắc chắn xoá không?')" href="{{URL::to('/xoa-phieudatmonan/'.$phieudatmonan->IdDatMon)}}" class="active styling-delete" ui-toggle-class="">
-                            <i class="fa fa-times text-danger text"></i>
-                        </a>
-                        <a onclick="return KiemTraDuyet()" style="margin: 6px" class="btn btn-warning" href="{{ route('Admin.chi-tiet', ['id'=>$phieudatmonan->IdKH]) }}">Xem chi tiết</a>
-                    </td>
+
+
+
                     </tr>
 
                 @endforeach
+                <tr>
+                    <td>Tổng số tiền</td>
+                    <td colspan="2"> {{number_format($phieudatmonan->TongGiaTien)}} VNĐ</td>
+                </tr>
 
                 </tbody>
             </table>
@@ -111,14 +92,5 @@
         </footer>
     </div>
 </div>
-<script>
-    function KiemTraDuyet()
-    {
-        if(confirm('Bạn có chắc chắn duyệt không?'))
-        {
-            return true;
-        }
-        return false;
-    }
-</script>
+
 @endsection

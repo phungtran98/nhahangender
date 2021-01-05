@@ -109,7 +109,7 @@
                                     <a href="{{route('xulydatmon',$item->IdMonAn)}}" style="background: none;">
                                         <h2 class="white">
                                             <button class="click-order" type="submit" id="order" name="submit">
-                                                {{$item->DonGia}} ₫
+                                                {{number_format($item->DonGia)}} ₫
                                             </button>
                                         </h2>
                                     </a>

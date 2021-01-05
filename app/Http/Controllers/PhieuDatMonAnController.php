@@ -30,13 +30,25 @@ class PhieuDatMonAnController extends Controller
     }
 
     // Xem phiếu đặt món ăn
+    // public function lietke_phieudatmonan(){
+    //     $this->authlogin();
+    //     //Lấy dữ liệu từ bảng ban tham gia vào bảng phieudatmonan theo IdBan
+    //     $lietke_phieudatmonan = DB::table('phieudatmonan')
+    //     ->join('khachhang','khachhang.IdKH','=','phieudatmonan.IdKH')
+    //     ->join('chitietdatmon','chitietdatmon.IdDatMon','=','phieudatmonan.IdDatMon')
+    //     ->join('monan','monan.IdMonAn','=','chitietdatmon.IdMonAn')
+    //     ->get();
+
+    //     $quanly_phieudatmonan = view('admin.phieudatmonan.lietke_phieudatmonan')->with('lietke_phieudatmonan',$lietke_phieudatmonan);
+
+    //     return view('admin_layout')->with('admin.phieudatmonan.lietke_phieudatmonan',$quanly_phieudatmonan);
+    // }
     public function lietke_phieudatmonan(){
         $this->authlogin();
         //Lấy dữ liệu từ bảng ban tham gia vào bảng phieudatmonan theo IdBan
         $lietke_phieudatmonan = DB::table('phieudatmonan')
         ->join('khachhang','khachhang.IdKH','=','phieudatmonan.IdKH')
-        ->join('chitietdatmon','chitietdatmon.IdDatMon','=','phieudatmonan.IdDatMon')
-        ->join('monan','monan.IdMonAn','=','chitietdatmon.IdMonAn')
+
         ->get();
 
         $quanly_phieudatmonan = view('admin.phieudatmonan.lietke_phieudatmonan')->with('lietke_phieudatmonan',$lietke_phieudatmonan);
@@ -65,6 +77,20 @@ class PhieuDatMonAnController extends Controller
         return view('admin_layout')->with('admin.phieudatmonan.sua_phieudatmonan',$quanly_phieudatmonan);
     }
 
+    public function ChiTietPhieu($IdDatMon){
+        $this->authlogin();
+            //Lấy dữ liệu từ bảng ban tham gia vào bảng phieudatmonan theo IdBan
+            $lietke_phieudatmonan = DB::table('phieudatmonan')
+            ->join('khachhang','khachhang.IdKH','=','phieudatmonan.IdKH')
+            ->join('chitietdatmon','chitietdatmon.IdDatMon','=','phieudatmonan.IdDatMon')
+            ->join('monan','monan.IdMonAn','=','chitietdatmon.IdMonAn')
+            ->where('khachhang.IdKH',$IdDatMon)
+            ->get();
+            // dd($lietke_phieudatmonan);
+
+        return view('admin.phieudatmonan.index',compact('lietke_phieudatmonan'));
+    }
+
     public function capnhat_phieudatmonan(Request $request, $IdDatMon){
         $data = array();
         $data['IdDatMon'] = $request->IdDatMon;
@@ -74,6 +100,14 @@ class PhieuDatMonAnController extends Controller
         DB::table('phieudatmonan')->where('IdDatMon',$IdDatMon)->update($data);
         Session::put('message','Cập nhật phiếu đặt món ăn thành công');
         return Redirect::to('lietke-phieudatmonan');
+    }
+
+
+    public function DuyetMonAn($id){
+       DB::table('phieudatmonan')->where('IdDatMon',$id)->update([
+           'TrangThai'=>1
+       ]);
+       return redirect()->back();
     }
 
 

@@ -152,7 +152,6 @@
     </footer>
 
 
-
     <script src="{{ asset('public/frontend/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/frontend/js/jquery.mixitup.min.js') }}"></script>
     <script src="{{ asset('public/frontend/js/wow.min.js') }}"></script>
@@ -161,6 +160,9 @@
     <script type="text/javascript" src="{{ asset('public/frontend/js/jQuery.scrollSpeed.js') }}"></script>
     <script type="text/javascript" src="{{asset('public/frontend/js/jquery.flexslider.min.js')}}"></script>
     <script src="{{ asset('public/frontend/js/script.js') }}"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
+    @stack('script')
     {{-- <script>
         document.addEventListener("DOMContentLoaded", (event) => {
 

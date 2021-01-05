@@ -120,6 +120,7 @@ class TaiKhoanController extends Controller
         $KH = DB::table('khachhang')->where('IdKH',$idKH)->first();
 
         $banDaDat = DB::table('phieudatban')->where('IdKH',$idKH)->join('nhahang','nhahang.IdNhaHang','phieudatban.IdNhaHang')->get();
+        
         return view('pages.taikhoan.chinhsuathongtin', compact('KH','banDaDat'));
     }
 

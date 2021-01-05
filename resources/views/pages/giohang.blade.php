@@ -122,6 +122,7 @@
             </td>
             <td colspan="3"></td>
             <td class="text-right" id="sau_giam">{{$SauGiam}} ₫</td>
+
         </tr>
         <tr>
             <td>
@@ -145,6 +146,12 @@
     <div class="col-sm-8">
         <form action="{{url('order')}}" method="POST">
             @csrf
+            <select name="idnhahang" id="NguyenNe" class="form-control">
+                <option value="" disabled selected>---Chọn nhà hàng---</option>
+                @foreach ($nhahang as $item)
+                    <option value=" {{$item->IdNhaHang}} ">  {{$item->TenNhaHang.' - '.$item->DiaChi}} </option>
+                @endforeach
+            </select>
             <input class="form-control" type="text" name="TenKH" value="{{$KH->TenKH}}" required>
 
             <input class="form-control" type="text" name="SdtKH" value="{{$KH->SdtKH}}" required>
@@ -165,9 +172,20 @@
 </div>
 <br><br>
 
+@push('script')
+<script>
+     // alert('ok');
 
+</script>
+@endpush
 <script>
     $(document).ready(function () {
+
+
+
+
+
+
         $('.quantity').on('keyup change click', function(){ //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
             var id = $(this).attr("data-id");
             var value= $(this).val();

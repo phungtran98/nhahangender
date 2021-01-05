@@ -220,3 +220,10 @@ Route::post('/admin-dashboard','AdminController@dashboard');
     Route::get('/xoa-phieudatmonan/{IdDatMon}','PhieuDatMonAnController@xoa_phieudatmonan');
 
     Route::get('/lietke-phieudatmonan','PhieuDatMonAnController@lietke_phieudatmonan');
+
+
+    Route::get('/duyet-phieudatmonan/{id}','PhieuDatMonAnController@DuyetMonAn')->name('Admin.mon');
+
+    Route::get('/chi-tiet-phieudatmonan/{id}','PhieuDatMonAnController@ChiTietPhieu')->name('Admin.chi-tiet');
+
+
